@@ -9,12 +9,68 @@
 		<h1>My First Heading</h1>
 
 		<p>My first paragraph.</p>
+		<img src="chrome.jpeg"/>
+		<div id="addDiv"></div>
 
 	</body>
 	<script>
-	//The goal of this test is to add ton of html elements with lots of css.
+
+	//some code taken from http://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/
+
+	var start = new Date();
+	var div = document.getElementById("addDiv");
+	
+	for (var i =0; i < 1000; i++){
+		var append = document.createElement('img');
+		if (i < 500){
+			append.setAttribute('src',"chrome.jpeg"  )
+			append.setAttribute('width', i+"px")
+			append.className = "div1";
+		} else {
+			append.setAttribute('src',"chromefox.png"  )
+			append.className = "div2";
+		}
+		div.appendChild(append);
+		//The goal of this test is to add ton of html elements with lots of css.
 		//First by looping through and appending each html element.
 		//Then by creating all the elements then attaching them.
+	}
+
+	for (i = 0; i < div.childNodes.length; i++){
+		div.childNodes[i].setAttributes = ".5";
+	}	
+
+	// var clone = div.cloneNode(false);
+	// console.log(clone);
+
+	// for (var i =0; i < 1000; i++){
+	// 	var append = document.createElement('img');
+	// 	if (i < 500){
+	// 		append.setAttribute('src',"chrome.jpeg"  )
+	// 		append.className = "div1";
+	// 		append.setAttribute('width', i+"px")
+
+	// 	} else {
+	// 		append.setAttribute('src',"chromefox.png"  )
+	// 		append.className = "div2";
+	// 	}
+	// 	clone.appendChild(append);
+	// 	//The goal of this test is to add ton of html elements with lots of css.
+	// 	//First by looping through and appending each html element.
+	// 	//Then by creating all the elements then attaching them.
+	// }
+
+	// // console.log(div);
+	// // var div = document.getElementById("addDiv");
+	// for (i = 0; i < clone.childNodes.length; i++){
+	// 	clone.childNodes[i].setAttributes = ".5";
+	// }	
+
+	// document.getElementById("addDiv").parentNode.replaceChild(clone ,div);
+
+	var stop = new Date()
+	var totalTime = stop - start;
+	console.log(totalTime);
 
 	</script>
 </html>
